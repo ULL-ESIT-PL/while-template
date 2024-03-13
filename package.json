@@ -7,18 +7,17 @@
     "calc2js": "./bin/calc2js.js"
   },
   "scripts": {
-    "test": "npm run compile; mocha test/test.mjs; mocha test/test-error.js",
-    "only-test": "mocha --inspect-brk only-test/test.mjs",
+    "test": "npm run test-pass; npm run test-err",
+    "test-pass": "npm run compile && mocha test/test.mjs",
+    "test-err": "npm run compile && mocha test/test-error.js",
     "cov": "c8 --reporter=html -o docs -x src/support-lib.js npm run test",
-    "test1": "npm run compile; ./bin/calc2js.mjs test/data/test1.calc ",
     "compile": "jison src/grammar.jison src/lexer.l -o src/calc.js",
     "clean": "rm -f src/calc.js; rm -fR coverage",
-    "comment": "Use -- for the following scripts, i.e. npm run mocha -- -scope2",
     "mocha": "test/scripts/t.sh mocha",
     "check": "test/scripts/t.sh check",
     "ready": "test/scripts/t.sh ready",
     "calc2js": "bin/calc2js.mjs",
-    "while-ast": "compast test/data/expectedjs/while.js | yq '.body[2].expression.expressions[1].right'"
+    "while-ast": "compast test/data/expectedjs/while.js | yq '.body[2].expression.expressions[0]'"
   },
   "keywords": [
     "ull",
